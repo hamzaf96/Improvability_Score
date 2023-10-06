@@ -2,13 +2,17 @@ import gdown
 
 
 def get_data_from_google_drive(
-    url: str, file_path: str = "/data/dataset/student_data.csv"
+    file_id: str, file_path: str = "/data/dataset/student_data.csv"
 ):
-    """_summary_
+    """download the csv file from google drive
 
     Args:
-        url (_type_): _description_
-        file_path (str, optional): _description_. Defaults to '/data/dataset/student_data.csv'.
+        file_id (str): _description_
+        file_path (str, optional): _description_. Defaults to "/data/dataset/student_data.csv".
     """
     # Download the file
-    gdown.download(url, file_path, quiet=False)
+    gdown.download(
+        url=f"https://drive.google.com/uc?id={file_id}",
+        output=file_path,
+        quiet=False,
+    )
