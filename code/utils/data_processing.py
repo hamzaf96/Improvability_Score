@@ -54,7 +54,9 @@ def convert_categorical_to_ohe(dataframe: pd.DataFrame) -> pd.DataFrame:
     # convert categorical data into numerical using ohe
     for col in dataframe.select_dtypes(include="object").columns:
         encoder = OneHotEncoder()
-        encoded_category = encoder.fit_transform(col.reshape(-1, 1)).toarray()
+        encoded_category = encoder.fit_transform(
+            dataframe[col].array.reshape(-1, 1)
+        ).toarray()
         dataframe[col] = encoded_category
 
     return dataframe
