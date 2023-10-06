@@ -7,8 +7,8 @@ def get_data_from_google_drive(
     """download the csv file from google drive
 
     Args:
-        file_id (str): _description_
-        file_path (str, optional): _description_. Defaults to "/data/dataset/student_data.csv".
+        file_id (str): get it from the shareable link in google drive
+        file_path (str, optional): path to the donwloaded file. Defaults to "/data/dataset/student_data.csv".
     """
     # Download the file
     gdown.download(
