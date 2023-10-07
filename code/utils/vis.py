@@ -10,8 +10,8 @@ def vis_corr_map(data: pd.DataFrame):
         data (pd.DataFrame): _description_
     """
     # visualize the correlation map
-    plt.figure(figsize=(10, 8))
-    sns.heatmap(data.corr(), annot=True, cmap="coolwarm", fmt=".2f", linewidths=0.5)
+    plt.figure(figsize=(20, 15))
+    sns.heatmap(data.corr(), annot=True, cmap="coolwarm", fmt=".2f", linewidths=1)
     plt.title("Correlation Heatmap")
     plt.show()
 
