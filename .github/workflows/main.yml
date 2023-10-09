@@ -16,7 +16,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.11  # Specify the Python version you need
+        python-version: 3.11.6  # Specify the Python version you need
 
     - name: Install dependencies
       run: |
@@ -27,7 +27,7 @@ jobs:
       run: |
         python -m pytest  # Replace with your test command
 
- #   - name: Deploy to Production
- #     if: success()
- #     run: |
- #       # Add your deployment script or commands here
+    - name: Deploy to Production
+      if: success()
+      run: |
+        streamlit run main.py 
