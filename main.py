@@ -1,6 +1,13 @@
+from Improvability_Score.code.utils.vis import (
+    vis_corr_map,
+    vis_distribution_data,
+    vis_scatter_data,
+)
+from Improvability_Score.code.src.improvability_score import ImrovabilityScore
 import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
+
 
 # Set the title and description for your app
 st.title("Simple Streamlit App")
