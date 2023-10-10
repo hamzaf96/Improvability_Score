@@ -30,4 +30,4 @@ jobs:
     - name: Deploy to Production
       if: success()
       run: |
-        runas /user:Administrator python -m streamlit run main.py -- --global.developmentMode
+        python -m streamlit run main.py -- --global.developmentMode
