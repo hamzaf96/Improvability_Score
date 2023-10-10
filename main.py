@@ -2,7 +2,6 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
 
-print("we are here !")
 # Set the title and description for your app
 st.title("Simple Streamlit App")
 st.write("This is a basic Streamlit app that displays a line chart.")
