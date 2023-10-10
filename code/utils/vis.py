@@ -10,10 +10,10 @@ def vis_corr_map(data: pd.DataFrame):
         data (pd.DataFrame): _description_
     """
     # visualize the correlation map
-    plt.figure(figsize=(20, 15))
+    fig, _ = plt.subplots(figsize=(20, 15))
     sns.heatmap(data.corr(), annot=True, cmap="coolwarm", fmt=".2f", linewidths=1)
     plt.title("Correlation Heatmap")
-    plt.show()
+    return fig
 
 
 def vis_distribution_data(data: pd.DataFrame):
@@ -22,10 +22,11 @@ def vis_distribution_data(data: pd.DataFrame):
     Args:
         data (pd.DataFrame): _description_
     """
-    plt.figure(figsize=(10, 8))
+    fig, _ = plt.subplots(figsize=(10, 8))
     sns.displot(data)
     plt.title("Distribution of the data")
     plt.show()
+    return fig
 
 
 def vis_scatter_data(x: pd.Series, y: pd.Series):
@@ -37,10 +38,10 @@ def vis_scatter_data(x: pd.Series, y: pd.Series):
     """
     # Create a scatter plot with Seaborn
     sns.set(style="whitegrid")  # Set the plot style
-    plt.figure(figsize=(8, 6))  # Set the figure size
+    fig, ax = plt.subplots(figsize=(8, 6))  # Set the figure size
 
     # Create the scatter plot
-    sns.scatterplot(x=x, y=y, marker="o", color="blue", s=50, label="Student")
+    scatter = ax.scatter(x=x, y=y, marker="o", color="blue", s=50, label="Student")
 
     # Add labels and a legend
     plt.xlabel(x.name)
@@ -52,5 +53,4 @@ def vis_scatter_data(x: pd.Series, y: pd.Series):
     plt.grid(True, linestyle="--", alpha=0.6)  # Add grid lines
     plt.legend()
 
-    # Show the plot
-    plt.show()
+    return fig, scatter

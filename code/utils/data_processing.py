@@ -60,3 +60,14 @@ def convert_categorical_to_ohe(dataframe: pd.DataFrame) -> pd.DataFrame:
         dataframe[col] = encoded_category
 
     return dataframe
+
+
+def save_csv(file_path: str, data: pd.DataFrame):
+    """_summary_
+
+    Args:
+        file_path (str): _description_
+        data (pd.DataFrame): _description_
+    """
+    data.to_csv(file_path, index=False)
+    print(f"DataFrame saved as {file_path}")

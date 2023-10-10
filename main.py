@@ -1,31 +1,62 @@
-from Improvability_Score.code.utils.vis import (
-    vis_corr_map,
-    vis_distribution_data,
+import streamlit as st
+import pandas as pd
+import mplcursors
+from code.utils.vis import (
     vis_scatter_data,
 )
-from Improvability_Score.code.src.improvability_score import ImrovabilityScore
-import streamlit as st
-import matplotlib.pyplot as plt
-import numpy as np
+from code.utils.data_processing import (
+    remove_nan_values,
+    convert_categorical_to_ohe,
+    remove_duplicate,
+    save_csv,
+)
+from code.utils.get_files import get_data_from_google_drive
+from code.src.improvability_score import ImprovabilityScore
 
 
-# Set the title and description for your app
-st.title("Simple Streamlit App")
-st.write("This is a basic Streamlit app that displays a line chart.")
+def main():
+    get_data_from_google_drive(
+        file_id="1Tr-x8-8fe081d1woq98BBXIv9UA6tboF", file_path="./data/dataset/data.csv"
+    )
 
-# Generate some random data for the line chart
-x = np.linspace(0, 10, 100)
-y = np.sin(x)
+    print("Start Processing the Data !")
+    df = pd.read_csv("./data/dataset/data.csv")
+    df = remove_duplicate(df)
+    df = remove_nan_values(df)
+    df = convert_categorical_to_ohe(df)
+    df_filtered = df.drop(columns=["FirstName", "FamilyName"])
+    print("Compute the Improvability Score: Start")
+    improvability_score = ImprovabilityScore(data=df_filtered)
+    improvability_score_list = improvability_score()
+    print("Compute the Improvability Score: Done")
+    df["Imrovability_Score"] = improvability_score_list
+    save_csv(file_path="./data/processed_data/processed_data.csv", data=df)
+    # Set the title and description for your app
+    st.title("Dashboard")
+    st.write(
+        "This is a the dashboard that will help choosen the student with the need to help."
+    )
 
-# Create a line chart using Matplotlib
-fig, ax = plt.subplots()
-ax.plot(x, y)
-ax.set_xlabel("X-axis")
-ax.set_ylabel("Y-axis")
-ax.set_title("Line Chart")
+    figure, scatter = vis_scatter_data(x=df["FinalGrade"], y=df["Imrovability_Score"])
 
-# Display the chart in the Streamlit app
-st.pyplot(fig)
+    # Create a cursor to display information on hover
+    cursor = mplcursors.cursor(scatter, hover=True)
 
-# Add text or other components to your app
-st.write("You can add more content here.")
+    # Function to display information when hovering
+    def on_hover(sel):
+        index = sel.target.index
+        sel.annotation.set_text(
+            f"FirstName: {index}\nFamilyName: {df['FamilyName'][index]}\n"
+        )
+
+    cursor.connect("add", on_hover)
+
+    # Display the chart in the Streamlit app
+    st.pyplot(figure)
+
+    # Add text or other components to your app
+    st.write("This is a version1 deliverable.")
+
+
+if __name__ == "__main__":
+    main()
