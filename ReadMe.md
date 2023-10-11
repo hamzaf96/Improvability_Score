@@ -38,4 +38,23 @@ If using Docker:
     $docker run -p 8501:8501 Improvability-app
     ```
 Else:
-    
+    ```bash
+    # Install virtualenv (if not already installed):
+    $pip install virtualenv
+
+    # Create a Virtual Environment:
+    $virtualenv venv # You can change venv with the desired name of the virtual env
+
+    # Activating a Virtual Environment:
+    $venv\Scripts\activate
+
+    # Install requirements and dependencies
+    $pip install -r requirements.txt
+
+    # Run the Script:
+    $ streamlit run main.py
+
+    # At the end, Do not forget to exit the venv
+    $deactivate
+
+    ```
