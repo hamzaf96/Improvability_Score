@@ -11,7 +11,7 @@ COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the current directory contents into the container at /app
-COPY . /app
+COPY . /Improvability_Score
 
 # Expose the port that Streamlit will run on (default is 8501)
 EXPOSE 8501

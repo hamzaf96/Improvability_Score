@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import mplcursors
 import os
 from code.utils.vis import (
     vis_scatter_data,
