@@ -1,4 +1,4 @@
-# Project Name
+# Improvability Score
 
 Faced with the drop in educational levels observed following the closure of schools, the “Ministério da Educação” (Portuguese Ministry of Education) is contacting you, with the idea of using data and AI to try to remedy the situation.
 
@@ -26,3 +26,14 @@ The Ministry would like the educational advisors of each establishment to have a
   - `ReadMe.md`
   - `requirements.txt`
     
+## Usage
+
+If using Docker:
+    
+    ```bash
+    # Build the docker image:
+    $docker build -t Improvability-app .
+
+    # Run the Docker container:
+    $docker run -p 8501:8501 Improvability-app
+ ```
