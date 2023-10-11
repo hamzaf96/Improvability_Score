@@ -57,4 +57,8 @@ Else:
     # At the end, Do not forget to exit the venv
     $deactivate
 ```
+
+### CI CD pipeline is targeted when pushing to the main branch.
+
+
     
