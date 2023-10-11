@@ -30,15 +30,15 @@ The Ministry would like the educational advisors of each establishment to have a
 
 If using Docker:
     
-    ```bash
+    ```
     # Build the docker image:
     $docker build -t Improvability-app .
 
     # Run the Docker container:
     $docker run -p 8501:8501 Improvability-app
-    ```
+    
 Else:
-    ```bash
+    ```
     # Install virtualenv (if not already installed):
     $pip install virtualenv
 
@@ -57,4 +57,4 @@ Else:
     # At the end, Do not forget to exit the venv
     $deactivate
 
-    ```
+    
