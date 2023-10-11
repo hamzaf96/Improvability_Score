@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import plotly.graph_objects as go
 
 
 def vis_corr_map(data: pd.DataFrame):
@@ -29,28 +30,36 @@ def vis_distribution_data(data: pd.DataFrame):
     return fig
 
 
-def vis_scatter_data(x: pd.Series, y: pd.Series):
+def vis_scatter_data(data: pd.DataFrame, x: str, y: str, label: str):
     """_summary_
 
     Args:
-        X (pd.Series): _description_
-        Y (pd.Series): _description_
-    """
-    # Create a scatter plot with Seaborn
-    sns.set(style="whitegrid")  # Set the plot style
-    fig, ax = plt.subplots(figsize=(8, 6))  # Set the figure size
+        data (pd.DataFrame): _description_
+        x (str): _description_
+        y (str): _description_
+        Label (str): _description_
 
-    # Create the scatter plot
-    scatter = ax.scatter(x=x, y=y, marker="o", color="blue", s=50, label="Student")
+    Returns:
+        _type_: _description_
+    """ """"""
+    # Create a Plotly scatter plot
+    fig = go.Figure()
+    # Create an interactive scatter plot with tooltips
+    # Add scatter trace with labels as tooltips
+    fig.add_trace(
+        go.Scatter(
+            x=data[x],
+            y=data[y],
+            text=data[label],
+            hoverinfo="x+y+text",  # Show text as tooltips on hover
+            marker=dict(size=10),
+            mode="markers",  # Only show markers
+        )
+    )
+    # fig = px.scatter(data, x=x, y=y, text=label)
 
-    # Add labels and a legend
-    plt.xlabel(x.name)
-    plt.ylabel(y.name)
-    # plt.title('Insights on Students that needs help')
+    # Customize the figure (optional)
+    fig.update_traces(textposition="top center")
+    fig.update_layout(title="Scatter Plot with Hover Information")
 
-    # Customize the appearance further
-    sns.despine(left=True, bottom=True)  # Remove the spines
-    plt.grid(True, linestyle="--", alpha=0.6)  # Add grid lines
-    plt.legend()
-
-    return fig, scatter
+    return fig

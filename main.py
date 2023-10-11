@@ -42,7 +42,6 @@ def main():
     improvability_score_list = improvability_score()
     print("Compute the Improvability Score: Done")
     df["Imrovability_Score"] = improvability_score_list
-
     # Check if the folder exists
     if not os.path.exists(folder_path_save_data):
         # If it doesn't exist, create it
@@ -58,10 +57,15 @@ def main():
         "This is a the dashboard that will help choosen the student with the need to help."
     )
 
-    figure, _ = vis_scatter_data(x=df["FinalGrade"], y=df["Imrovability_Score"])
+    figure = vis_scatter_data(
+        data=df,
+        x=df["FinalGrade"].name,
+        y=df["Imrovability_Score"].name,
+        label="StudentID",
+    )
 
     # Display the chart in the Streamlit app
-    st.pyplot(figure)
+    st.plotly_chart(figure)
 
     # Add text or other components to your app
     st.write("This is a version1 deliverable.")
